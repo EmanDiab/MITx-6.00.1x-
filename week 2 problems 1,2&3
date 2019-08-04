@@ -1,0 +1,58 @@
+#problem 1 
+
+for i in range (12):
+    min_pay = monthlyPaymentRate*balance
+    unpaid = balance - min_pay
+    interset = unpaid * (annualInterestRate/12)
+    balance = balance - min_pay + interset
+    balance = round(balance , 3)
+    #print("month " + str(i+1) + " Remaining balance : " + str(balance))
+    
+print("Remaning balance: " + str(round(balance,2)) + "$")
+
+
+#problem 2 
+
+assume_min_pay = 10
+m = balance
+while balance > 0 :
+    balance = m
+    for i in range(12):
+        unpaid = balance - assume_min_pay
+        interset = unpaid * (annualInterestRate/12)
+        balance = balance - assume_min_pay + interset
+    #print(balance)
+    if balance <= 0 :
+        lowest_paid = assume_min_pay
+        print("Lowest Payment: " + str(lowest_paid))
+        break
+
+    else :
+        assume_min_pay+=10
+        
+#problem 3 
+
+s = balance / 12
+l = (balance*(1+(annualInterestRate/12))**12)/12.0
+m = (l + s)/2.0
+a = balance
+#Using bisection to get the same idea as before
+while balance < -0.3 or balance > 0.3 :
+    balance = a
+    m = (l + s)/2.0
+    for i in range(12):
+        unpaid = balance - m
+        interset = unpaid * (annualInterestRate/12.0)
+        balance = balance - m + interset
+        
+    if balance < 0 :
+        
+        l = m
+        
+    if balance > 0 :
+        s = m
+        
+        
+        
+
+print("Lowest Payment: " + str(round(m,2)) )
